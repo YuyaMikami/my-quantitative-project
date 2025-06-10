@@ -12,13 +12,12 @@ oecd_countries = [
     'United Kingdom','United States'
 ]
 
-# 1990〜2019年のデータ抽出
+
 data = pwt90[
     pwt90['country'].isin(oecd_countries) &
     pwt90['year'].between(1990, 2019)
 ]
 
-# 必要な列のみ抽出
 relevant_cols = ['countrycode', 'country', 'year', 'rgdpna', 'rkna', 'emp', 'labsh']
 data = data[relevant_cols].dropna()
 
@@ -64,7 +63,6 @@ avg_row = {
 }
 results = pd.concat([results, pd.DataFrame([avg_row])], ignore_index=True)
 
-# 出力
 print("\nGrowth Accounting (Y/N) in OECD Countries: 1990–2019")
 print("=" * 90)
 print(results[['country', 'Growth Rate', 'TFP Growth', 'Capital Deepening', 'TFP Share', 'Capital Share']].to_string(index=False, float_format="%.2f"))
